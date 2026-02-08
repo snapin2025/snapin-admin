@@ -6,7 +6,6 @@ function getBasicAuthToken() {
     // const password = process.env.ADMIN_PASSWORD!;
     const email =  "admin@gmail.com";
     const password = "admin";
-    console.log(Buffer.from(`${email}:${password}`).toString("base64"))
     return Buffer.from(`${email}:${password}`).toString("base64");
 }
 

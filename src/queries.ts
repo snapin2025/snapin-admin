@@ -1,26 +1,4 @@
-import { gql } from "@apollo/client";
-
-
-type User = {
-    id: number;
-    userName: string;
-    email: string;
-    createdAt: string;
-    profile: {
-        id: number;
-    };
-    userBan?: {
-        id: number;
-    } | null;
-};
-
-type GetUserResponse = {
-    getUser: User;
-};
-
-type GetUserVariables = {
-    userId: number;
-};
+import {gql} from "@apollo/client";
 
 export const GET_USERS = gql`
   query GetUsers(
@@ -44,6 +22,12 @@ export const GET_USERS = gql`
         userName    
         email
         createdAt
+        userBan {
+        reason
+        createdAt
+
+        }
+        
       }
       pagination {
         page
@@ -54,20 +38,3 @@ export const GET_USERS = gql`
     }
   }
 `;
-
-
-
-
-export type UsersPaginationModel = {
-    users: User[];
-    pagination: {
-        page: number;
-        pageSize: number;
-        pagesCount: number;
-        totalCount: number;
-    };
-};
-
-export type GetUsersResponse = {
-    getUsers: UsersPaginationModel;
-};

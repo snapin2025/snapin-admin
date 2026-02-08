@@ -1,16 +1,4 @@
 import {gql} from "@apollo/client";
-import {getClient} from "./ApolloClient";
-
-interface LoginAdminResponse {
-    loginAdmin: {
-        logged: boolean;
-    };
-}
-
-interface LoginAdminVariables {
-    email: string;
-    password: string;
-}
 
 
 export const LOGIN_ADMIN = gql`
@@ -22,16 +10,14 @@ export const LOGIN_ADMIN = gql`
 `;
 
 
-export async function loginAdminAction(email: string, password: string) {
-    const client = getClient();
+export const BAN_USER = gql`
+  mutation BanUser($userId: Int!, $banReason: String!) {
+    banUser(userId: $userId, banReason: $banReason)
+  }
+`;
 
-    const {data} = await client.mutate<LoginAdminResponse, LoginAdminVariables>({
-        mutation: LOGIN_ADMIN,
-        variables: {
-            email,
-            password,
-        },
-    });
-
-    return data?.loginAdmin.logged;
-}
+export const UNBAN_USER = gql`
+  mutation UnBanUser($userId: Int!) {
+      unbanUser(userId: $userId) 
+  } 
+`
