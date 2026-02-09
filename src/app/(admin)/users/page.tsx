@@ -1,3 +1,4 @@
+"use client"
 import {query} from "@/ApolloClient";
 import {GET_USERS} from "@/queries";
 import {GetUsersQuery, GetUsersQueryVariables, SortDirection, User, UserBlockStatus} from "@/graphql-types";
@@ -6,26 +7,42 @@ import UsersList from "@/components/UsersList";
 import {Table} from "@/components/Table/Table";
 import {BanUser} from "@/features/ban-user/BanUser";
 import {UnBanUser} from "@/features/unban-user/UnBanUser";
+import { useQuery } from "@apollo/client/react";
 
 
-const Page = async () => {
-
-    const {data} = await query<GetUsersQuery, GetUsersQueryVariables>({
-        query: GET_USERS,
+const Page =  () => {
+    const { data, loading, error } = useQuery<
+        GetUsersQuery,
+        GetUsersQueryVariables
+    >(GET_USERS, {
         variables: {
-            pageSize: 1,
+            pageSize: 10,
             pageNumber: 1,
             sortBy: "createdAt",
             sortDirection: SortDirection.Desc,
+            searchTerm: "",
             statusFilter: UserBlockStatus.All,
-            // searchTerm: "alex", // опционально
         },
-        context: {
-            fetchOptions: {
-                next: {tags: ["users"]} // подписываем компонент на тег "users"
-            }
-        },
-    })
+    });
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error.message}</p>;
+    // const {data} = await query<GetUsersQuery, GetUsersQueryVariables>({
+    //     query: GET_USERS,
+    //     variables: {
+    //         pageSize: 1,
+    //         pageNumber: 1,
+    //         sortBy: "createdAt",
+    //         sortDirection: SortDirection.Desc,
+    //         statusFilter: UserBlockStatus.All,
+    //         // searchTerm: "alex", // опционально
+    //     },
+    //     context: {
+    //         fetchOptions: {
+    //             next: {tags: ["users"]} // подписываем компонент на тег "users"
+    //         }
+    //     },
+    // })
     return (
         <div>
             <h1>Users page</h1>
