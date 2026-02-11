@@ -1,4 +1,4 @@
-"use client"
+
 import {banUser} from "@/actions";
 import {Button} from "snapinui";
 

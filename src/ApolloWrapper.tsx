@@ -1,5 +1,4 @@
 "use client";
-// ^ this file needs the "use client" pragma
 
 import {HttpLink} from "@apollo/client";
 import {
@@ -14,7 +13,8 @@ function makeClient() {
 
     const httpLink = new HttpLink({
         // this needs to be an absolute url, as relative urls cannot be used in SSR
-        uri: "http://localhost:3000/api/graphql",
+        uri: "http://localhost:3000/api/graphql", // <-- наш
+        credentials: "include", // чтобы cookie отправлялись автоматически
         // you can disable result caching here if you want to
         // (this does not work if you are rendering your page with `export const dynamic = "force-static"`)
         fetchOptions: {

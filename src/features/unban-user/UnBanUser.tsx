@@ -1,13 +1,13 @@
-"use client"
-import {unBanUser} from "@/actions";
-import {Button} from "snapinui";
 
-type Props = {
-    userId: number;
-};
-export const UnBanUser = ({userId}: Props) => {
-    const handleClick = async () => {
-        await unBanUser(userId);
+    import {unBanUser} from "@/actions";
+    import {Button} from "snapinui";
+
+    type Props = {
+        userId: number;
     };
-    return <Button onClick={handleClick}>Unban</Button>;
-};
+    export const UnBanUser = ({userId}: Props) => {
+        const handleClick = async () => {
+            await unBanUser(userId);
+        };
+        return <Button onClick={handleClick}>Unban</Button>;
+    };

@@ -1,100 +1,57 @@
 "use client"
-import {query} from "@/ApolloClient";
 import {GET_USERS} from "@/queries";
-import {GetUsersQuery, GetUsersQueryVariables, SortDirection, User, UserBlockStatus} from "@/graphql-types";
-import UsersList from "@/components/UsersList";
-
-import {Table} from "@/components/Table/Table";
-import {BanUser} from "@/features/ban-user/BanUser";
-import {UnBanUser} from "@/features/unban-user/UnBanUser";
-import { useQuery } from "@apollo/client/react";
+import {GetUsersQuery, GetUsersQueryVariables, SortDirection, UserBlockStatus} from "@/graphql-types";
+import UsersList from "@/widgets/users-list/ui/UsersList";
+import {useQuery, useSuspenseQuery} from "@apollo/client/react";
+import {Pagination} from "snapinui";
+import {useRouter, useSearchParams} from "next/navigation";
 
 
-const Page =  () => {
-    const { data, loading, error } = useQuery<
-        GetUsersQuery,
-        GetUsersQueryVariables
-    >(GET_USERS, {
+const Page = () => {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const currentPage = Math.max(
+        Number(searchParams.get("page")) || 1,
+        1
+    );
+    const pageSize = 10;
+
+    const {data, error} = useQuery<GetUsersQuery, GetUsersQueryVariables>(GET_USERS, {
         variables: {
             pageSize: 10,
-            pageNumber: 1,
+            pageNumber: currentPage,
             sortBy: "createdAt",
             sortDirection: SortDirection.Desc,
             searchTerm: "",
             statusFilter: UserBlockStatus.All,
         },
     });
+    const users = data?.getUsers?.users ?? [];
+    const totalCount = data?.getUsers?.pagination?.totalCount ?? 0;
 
-    if (loading) return <p>Loading...</p>;
+    const handlePageChange = (page: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("page", String(page));
+
+        // startTransition(() => {
+        //     router.push(`?${params.toString()}`, {scroll: false});
+        // });
+        router.push(`?${params.toString()}`, {scroll: false});
+    };
+
+
+    // if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
-    // const {data} = await query<GetUsersQuery, GetUsersQueryVariables>({
-    //     query: GET_USERS,
-    //     variables: {
-    //         pageSize: 1,
-    //         pageNumber: 1,
-    //         sortBy: "createdAt",
-    //         sortDirection: SortDirection.Desc,
-    //         statusFilter: UserBlockStatus.All,
-    //         // searchTerm: "alex", // опционально
-    //     },
-    //     context: {
-    //         fetchOptions: {
-    //             next: {tags: ["users"]} // подписываем компонент на тег "users"
-    //         }
-    //     },
-    // })
+
     return (
-        <div>
-            <h1>Users page</h1>
-            <Table.Root>
-                <Table.TableHeader>
-                    <Table.TableRow>
-                        <Table.TableCellHead></Table.TableCellHead>
-                        <Table.TableCellHead>User ID</Table.TableCellHead>
-                        <Table.TableCellHead>Profile Link</Table.TableCellHead>
-                        <Table.TableCellHead>Username</Table.TableCellHead>
-                        <Table.TableCellHead>Date added</Table.TableCellHead>
-                        <Table.TableCellHead>Actions</Table.TableCellHead>
-                    </Table.TableRow>
-                </Table.TableHeader>
-                <Table.TableBody>
-                    {data.getUsers.users.map((user: User) => {
-                        console.log(user.userBan);
-                            return <Table.TableRow key={user.id}>
-                                <Table.TableCell>
-                                    {user.userBan?.reason ? '🚫' : '✅'}
-                                </Table.TableCell>
-                                <Table.TableCell>
-                                    {user.id}
-                                </Table.TableCell>
-                                <Table.TableCell>
-                                    {user.userName}
-                                </Table.TableCell>
-                                <Table.TableCell>
-                                    {user.userName}
-
-                                </Table.TableCell>
-                                <Table.TableCell>
-                                    {new Date(user.createdAt).toLocaleDateString('ru-RU')}
-                                </Table.TableCell>
-                                <Table.TableCell>
-                                    <BanUser userId={user.id}/>
-                                    <UnBanUser userId={user.id}/>
-                                </Table.TableCell>
-                            </Table.TableRow>
-                        }
-                    )}
-                </Table.TableBody>
-            </Table.Root>
-
-            <ul>
-
-            </ul>
-
-            <p>
-                Всего пользователей: {data?.getUsers.pagination.totalCount}
-            </p>
-        </div>
+        <section style={{}}>
+            <UsersList users={users}/>
+            <Pagination onPageChange={handlePageChange}
+                        pageSize={pageSize}
+                        currentPage={currentPage}
+                        totalCount={totalCount}/>
+        </section>
     );
 };
 

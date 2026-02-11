@@ -1,13 +1,23 @@
-import { NextRequest, NextResponse } from "next/server";
+// app/api/graphql/route.ts
+import { NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
+    // Берём cookie из запроса
+    const cookieHeader = req.headers.get("cookie") || "";
+
+    // Проверяем авторизацию
+    const isAuth = cookieHeader.includes("admin_auth=true");
+    if (!isAuth) return new Response("Unauthorized", { status: 401 });
+
+    // Берём тело запроса от клиента
     const body = await req.text();
 
+    // Серверные креды для внешнего API
     const token = Buffer.from(
         `${process.env.ADMIN_EMAIL}:${process.env.ADMIN_PASSWORD}`
     ).toString("base64");
 
-    const res = await fetch("https://inctagram.work/api/v1/graphql", {
+    const resBackend = await fetch("https://inctagram.work/api/v1/graphql", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -16,6 +26,7 @@ export async function POST(req: NextRequest) {
         body,
     });
 
-    const data = await res.json();
+    const data = await resBackend.json();
+
     return NextResponse.json(data);
 }

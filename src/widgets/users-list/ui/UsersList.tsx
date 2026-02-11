@@ -2,7 +2,7 @@
 import {User} from "@/graphql-types";
 import {BanUser} from "@/features/ban-user/BanUser";
 import {UnBanUser} from "@/features/unban-user/UnBanUser";
-import {Table} from "@/components/Table/Table";
+import {Table} from "@/shared/ui/Table/Table";
 
 
 
@@ -12,7 +12,6 @@ type Props = {
 
 const UsersList = ({users}: Props) => {
     if (users.length === 0) return []
-    console.log(users);
     return (
         <Table.Root>
             <Table.TableHeader>
