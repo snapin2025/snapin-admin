@@ -2,7 +2,8 @@
 import {SuperAdminSignInForm} from "@/widgets/sign-in-form/ui/SuperAdminSignInForm";
 import {MutationLoginAdminArgs} from "@/graphql-types";
 import {useRouter} from 'next/navigation'
-import {SUPER_ADMIN_ROUTES} from "@/shared/lib/super-admin";
+import {SUPER_ADMIN_ROUTES} from "@/shared/lib/super-admin-routes";
+
 
 
 const Page = () => {
@@ -17,7 +18,7 @@ const Page = () => {
             });
 
             if (res.ok) {
-                console.log("✅ Admin logged in");
+                 console.log("✅ Admin logged in");
                 router.push(SUPER_ADMIN_ROUTES.USERS);
             } else {
                 console.log("❌ Invalid credentials");

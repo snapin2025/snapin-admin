@@ -2,24 +2,17 @@
 import {GET_USERS} from "@/queries";
 import {GetUsersQuery, GetUsersQueryVariables, SortDirection, UserBlockStatus} from "@/graphql-types";
 import UsersList from "@/widgets/users-list/ui/UsersList";
-import {useQuery, useSuspenseQuery} from "@apollo/client/react";
-import {Pagination} from "snapinui";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useQuery} from "@apollo/client/react";
+import {Pagination, Select} from "snapinui";
+import {usePaginationParams} from "@/widgets/users-list/model/usePaginationParams";
 
 
 const Page = () => {
-    const router = useRouter();
-    const searchParams = useSearchParams();
+    const {currentPage, pageSize, setPage, setPageSize} = usePaginationParams();
 
-    const currentPage = Math.max(
-        Number(searchParams.get("page")) || 1,
-        1
-    );
-    const pageSize = 10;
-
-    const {data, error} = useQuery<GetUsersQuery, GetUsersQueryVariables>(GET_USERS, {
+    const {data, loading, error} = useQuery<GetUsersQuery, GetUsersQueryVariables>(GET_USERS, {
         variables: {
-            pageSize: 10,
+            pageSize: pageSize,
             pageNumber: currentPage,
             sortBy: "createdAt",
             sortDirection: SortDirection.Desc,
@@ -27,21 +20,19 @@ const Page = () => {
             statusFilter: UserBlockStatus.All,
         },
     });
+
     const users = data?.getUsers?.users ?? [];
     const totalCount = data?.getUsers?.pagination?.totalCount ?? 0;
 
     const handlePageChange = (page: number) => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set("page", String(page));
-
-        // startTransition(() => {
-        //     router.push(`?${params.toString()}`, {scroll: false});
-        // });
-        router.push(`?${params.toString()}`, {scroll: false});
+        setPage(page);
     };
 
+    const handlePageSize = (pageSize: string) => {
+        setPageSize(Number(pageSize));
+    }
 
-    // if (loading) return <p>Loading...</p>;
+
     if (error) return <p>Error: {error.message}</p>;
 
     return (
@@ -51,6 +42,12 @@ const Page = () => {
                         pageSize={pageSize}
                         currentPage={currentPage}
                         totalCount={totalCount}/>
+            <Select value={String(pageSize)}
+                    onValueChange={handlePageSize}
+                    defaultValue={String(pageSize)}
+                    options={[{value: '10', label: '10'}, {value: '20', label: '20'},]}
+                    label={"select"}/>
+
         </section>
     );
 };

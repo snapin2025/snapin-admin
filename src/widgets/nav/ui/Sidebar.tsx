@@ -4,11 +4,8 @@ import { usePathname } from 'next/navigation'
 import { clsx } from 'clsx'
 
 import s from './Sidebar.module.css'
-import {SUPER_ADMIN_ROUTES} from "@/shared/lib/super-admin";
 import {ImageIcon, SvgStats, CreditCardIcon, SvgProfile} from "@/shared/ui/icons";
-
-
-
+import {SUPER_ADMIN_ROUTES} from "@/shared/lib/super-admin-routes";
 
 const NAV_ITEMS = [
   { name: 'Users list', href: SUPER_ADMIN_ROUTES.USERS, icon: SvgProfile },
