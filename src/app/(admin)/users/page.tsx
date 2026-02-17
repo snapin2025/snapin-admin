@@ -1,5 +1,5 @@
 "use client"
-import {GET_USERS} from "@/queries";
+import {GET_USERS} from "@/shared/api/queries";
 import {GetUsersQuery, GetUsersQueryVariables, SortDirection, UserBlockStatus} from "@/graphql-types";
 import UsersList from "@/widgets/users-list/ui/UsersList";
 import {useQuery} from "@apollo/client/react";
@@ -46,7 +46,7 @@ const Page = () => {
                     onValueChange={handlePageSize}
                     defaultValue={String(pageSize)}
                     options={[{value: '10', label: '10'}, {value: '20', label: '20'},]}
-                    label={"select"}/>
+                    label={"select  page size"}/>
 
         </section>
     );

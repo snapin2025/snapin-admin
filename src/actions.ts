@@ -3,7 +3,7 @@
 import {getClient} from "@/ApolloClient";
 
 import {BanUserMutation, MutationBanUserArgs, MutationUnbanUserArgs} from "@/graphql-types";
-import {BAN_USER, UNBAN_USER} from "@/mutation";
+import {BAN_USER, UNBAN_USER} from "@/shared/api/mutation";
 import {revalidatePath, revalidateTag, updateTag} from "next/cache";
 
 export async function banUser(userId: number, banReason: string) {

@@ -1,9 +1,6 @@
-
 import {User} from "@/graphql-types";
-import {BanUser} from "@/features/ban-user/BanUser";
-import {UnBanUser} from "@/features/unban-user/UnBanUser";
 import {Table} from "@/shared/ui/Table/Table";
-
+import {UserActionsMenu} from "@/widgets/user-actions/ui/UserActionsMenu";
 
 
 type Props = {
@@ -28,24 +25,23 @@ const UsersList = ({users}: Props) => {
                 {users.map((user: User) => (
                     <Table.TableRow key={user.id}>
                         <Table.TableCell>
-                            {user.userBan?.reason }
+                            {user.userBan?.reason && '🚫'}
                         </Table.TableCell>
                         <Table.TableCell>
                             {user.id}
                         </Table.TableCell>
                         <Table.TableCell>
-                           {user.userName}
+                            {user.userName}
                         </Table.TableCell>
                         <Table.TableCell>
-                           {user.userName}
+                            {user.userName}
 
                         </Table.TableCell>
                         <Table.TableCell>
-                          {new Date(user.createdAt).toLocaleDateString('ru-RU')}
+                            {new Date(user.createdAt).toLocaleDateString('ru-RU')}
                         </Table.TableCell>
                         <Table.TableCell>
-                            <BanUser userId={user.id}/>
-                            <UnBanUser userId={user.id}/>
+                            <UserActionsMenu user={user}/>
                         </Table.TableCell>
                     </Table.TableRow>
                 ))}

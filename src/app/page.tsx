@@ -1,7 +1,4 @@
-import {SvgStats} from "@/shared/ui/icons";
-
 export default async function Home() {
-
 
     return (
         <div>
