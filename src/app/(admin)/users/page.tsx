@@ -46,7 +46,8 @@ const Page = () => {
                     onValueChange={handlePageSize}
                     defaultValue={String(pageSize)}
                     options={[{value: '10', label: '10'}, {value: '20', label: '20'},]}
-                    label={"select  page size"}/>
+                    label={"select  page size"}
+                    />
 
         </section>
     );
