@@ -38,15 +38,19 @@ const Page = () => {
     return (
         <section style={{}}>
             <UsersList users={users}/>
-            <Pagination onPageChange={handlePageChange}
-                        pageSize={pageSize}
-                        currentPage={currentPage}
-                        totalCount={totalCount}/>
-            <Select value={String(pageSize)}
-                    onValueChange={handlePageSize}
-                    defaultValue={String(pageSize)}
-                    options={[{value: '10', label: '10'}, {value: '20', label: '20'},]}
-                    label={"select  page size"}/>
+            <div style={{display: "flex", justifyContent: "start", alignItems: "center"}}>
+
+                <Pagination onPageChange={handlePageChange}
+                            pageSize={pageSize}
+                            currentPage={currentPage}
+                            totalCount={totalCount}/>
+                <Select value={String(pageSize)}
+                        onValueChange={handlePageSize}
+                        defaultValue={String(pageSize)}
+                        options={[{value: '10', label: '10'}, {value: '20', label: '20'},]}
+                        label={"select  page size"}
+                />
+            </div>
 
         </section>
     );

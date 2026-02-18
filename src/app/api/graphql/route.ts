@@ -7,7 +7,10 @@ export async function POST(req: Request) {
 
     // Проверяем авторизацию
     const isAuth = cookieHeader.includes("admin_auth=true");
-    if (!isAuth) return new Response("Unauthorized", { status: 401 });
+    if (!isAuth) {
+        //redirect
+        return new Response("Unauthorized", {status: 401})
+    };
 
     // Берём тело запроса от клиента
     const body = await req.text();

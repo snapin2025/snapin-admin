@@ -25,7 +25,7 @@ const UsersList = ({users}: Props) => {
                 {users.map((user: User) => (
                     <Table.TableRow key={user.id}>
                         <Table.TableCell>
-                            {user.userBan?.reason && '🚫'}
+                            {user.userBan?.reason }
                         </Table.TableCell>
                         <Table.TableCell>
                             {user.id}

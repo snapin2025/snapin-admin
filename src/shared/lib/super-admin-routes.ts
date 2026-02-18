@@ -5,7 +5,7 @@
 export const SUPER_ADMIN_ROUTES = {
   SIGN_IN: '/login',
   USERS: '/users',
-  USER_DETAIL: (userId: string) => `/super-admin/users/${userId}`,
+  USER_DETAIL: (userId: string) => `/users/${userId}`,
   STATISTICS: '/statistics',
   PAYMENTS: '/payments-list',
   POSTS: '/posts',
