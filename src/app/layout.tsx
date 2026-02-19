@@ -1,9 +1,10 @@
 import type {Metadata} from "next";
-import "snapinui/style.css"
 import {ReactNode} from "react";
 import {ApolloWrapper} from "@/ApolloWrapper";
+import {Header} from "@/widgets/header";
 import "./globals.css"
-import {Header} from "@/widgets/header/ui/Header";
+import "snapinui/style.css"
+
 
 export const metadata: Metadata = {
     title: "AdminPanel",

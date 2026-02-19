@@ -1,0 +1,1 @@
+export {usePaginationParams} from "./model/usePaginationParams"

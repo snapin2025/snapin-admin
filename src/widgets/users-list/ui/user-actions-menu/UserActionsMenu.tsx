@@ -8,14 +8,14 @@ import {
     DropdownMenu,
     DropdownTrigger, Select, Typography,
 } from "snapinui"
+
 import {SvgBlockIcon, SvgDeleteIcon, SvgDotsIcon, SvgUnblockIcon} from "@/shared/ui/icons"
 import {User} from "@/graphql-types"
-import {useBlockUser} from "@/features/ban-user/api/useBlockUser"
-import {useUnblockUser} from "@/features/unban-user/api/useUnblockUser"
-import {useDeleteUser} from "@/features/delete-user/api/useDeleteUser"
+import {useBlockUser, useDeleteUser, useUnblockUser} from "@/features";
+
+import { ConfirmDialogFactory } from "../../model/confirmDialogFactory"
+import {BanReason, BanReasons, UserAction, UserActions} from "../../model/constants"
 import s from "./index.module.css"
-import {ConfirmDialogFactory} from "../model/confirmDialogFactory"
-import {BanReason, BanReasons, UserAction, UserActions} from "@/widgets/user-actions/model/constants";
 
 type Props = { user: User }
 

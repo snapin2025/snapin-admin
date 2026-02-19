@@ -1,9 +1,10 @@
 "use client"
 
-import {User} from "@/graphql-types"
 import {ReactNode} from "react";
-import {UserAction, UserActions} from "@/widgets/user-actions/model/constants";
 import {AlertAction, AlertCancel, AlertDescription, AlertDialog, Button, Typography} from "snapinui";
+import {User} from "@/graphql-types"
+import {UserAction, UserActions} from "./constants";
+
 
 
 type DialogFactoryOptions = {

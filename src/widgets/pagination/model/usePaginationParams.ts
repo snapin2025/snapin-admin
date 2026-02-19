@@ -7,8 +7,7 @@ const DEFAULT_PAGE = 1;
 const DEFAULT_PAGE_SIZE = 10;
 
 export const usePaginationParams = () => {
-    const {searchParams, setQueryParams} =
-        useQueryParams<PaginationParams>();
+    const {searchParams, setQueryParams} = useQueryParams<PaginationParams>();
 
 
     const currentPage = Math.max(Number(searchParams.get("page")) || DEFAULT_PAGE, 1);

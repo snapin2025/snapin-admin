@@ -1,13 +1,14 @@
 "use client"
-import {GET_USERS} from "@/shared/api/queries";
-import {GetUsersQuery, GetUsersQueryVariables, SortDirection, UserBlockStatus} from "@/graphql-types";
-import UsersList from "@/widgets/users-list/ui/UsersList";
-import {useQuery} from "@apollo/client/react";
+
 import {Pagination, Select} from "snapinui";
-import {usePaginationParams} from "@/widgets/users-list/model/usePaginationParams";
+import {GET_USERS} from "@/shared/api";
+import {UsersList} from "@/widgets/users-list";
+import {usePaginationParams} from "@/widgets/pagination";
+import {useQuery} from "@apollo/client/react";
+import {GetUsersQuery, GetUsersQueryVariables, SortDirection, UserBlockStatus} from "@/graphql-types";
 
 
-const Page = () => {
+export default function Page ()  {
     const {currentPage, pageSize, setPage, setPageSize} = usePaginationParams();
 
     const {data, loading, error} = useQuery<GetUsersQuery, GetUsersQueryVariables>(GET_USERS, {
@@ -55,5 +56,3 @@ const Page = () => {
         </section>
     );
 };
-
-export default Page;

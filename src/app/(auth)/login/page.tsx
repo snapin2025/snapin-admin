@@ -1,12 +1,13 @@
 "use client"
-import {SuperAdminSignInForm} from "@/widgets/sign-in-form/ui/SuperAdminSignInForm";
-import {MutationLoginAdminArgs} from "@/graphql-types";
 import {useRouter} from 'next/navigation'
+
+import {MutationLoginAdminArgs} from "@/graphql-types";
 import {SUPER_ADMIN_ROUTES} from "@/shared/lib/super-admin-routes";
+import {SuperAdminSignInForm} from "@/widgets/sign-in-form";
 
 
 
-const Page = () => {
+export default function Page  () {
     const router = useRouter()
 
     const handleLogin = async ({ email, password }: MutationLoginAdminArgs) => {
@@ -36,5 +37,3 @@ const Page = () => {
         </section>
     );
 };
-
-export default Page;

@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client/react";
-import { UNBAN_USER } from "@/shared/api/mutation";
 import {MutationUnbanUserArgs, UnBanUserMutation} from "@/graphql-types";
+import {UNBAN_USER} from "@/shared/api";
 
 export const useUnblockUser = () => {
     const [mutate, state] =

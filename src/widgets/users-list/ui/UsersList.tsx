@@ -1,13 +1,14 @@
 import {User} from "@/graphql-types";
 import {Table} from "@/shared/ui/Table/Table";
-import {UserActionsMenu} from "@/widgets/user-actions/ui/UserActionsMenu";
+import { UserActionsMenu } from "./user-actions-menu/UserActionsMenu";
+
 
 
 type Props = {
     users: User[];
 };
 
-const UsersList = ({users}: Props) => {
+export const UsersList = ({users}: Props) => {
     if (users.length === 0) return []
     return (
         <Table.Root>
@@ -50,5 +51,3 @@ const UsersList = ({users}: Props) => {
 
     );
 };
-
-export default UsersList;

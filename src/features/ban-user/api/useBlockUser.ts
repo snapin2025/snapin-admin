@@ -1,6 +1,7 @@
 import {useMutation} from "@apollo/client/react";
 import {BanUserMutation, BanUserMutationVariables} from "@/graphql-types";
-import {BAN_USER} from "@/shared/api/mutation";
+import {BAN_USER} from "@/shared/api";
+
 
 
 export const useBlockUser = () => {
