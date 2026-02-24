@@ -22,12 +22,23 @@ export const GET_USERS = gql`
         userName    
         email
         createdAt
-        userBan {
-        reason
-        createdAt
-
+        profile {     
+          id
+          userName
+          firstName
+          lastName
+          createdAt  # ← Добавьте эту строку!
+          avatars {
+            url
+            width
+            height
+            fileSize
+          }
         }
-        
+        userBan {
+          reason
+          createdAt
+        }
       }
       pagination {
         page
