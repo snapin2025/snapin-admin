@@ -8,10 +8,10 @@ import {useQuery} from "@apollo/client/react";
 import {GetUsersQuery, GetUsersQueryVariables, SortDirection, UserBlockStatus} from "@/graphql-types";
 
 
-export default function Page ()  {
+export default function Page() {
     const {currentPage, pageSize, setPage, setPageSize} = usePaginationParams();
 
-    const {data, loading, error} = useQuery<GetUsersQuery, GetUsersQueryVariables>(GET_USERS, {
+    const {data, previousData, error} = useQuery<GetUsersQuery, GetUsersQueryVariables>(GET_USERS, {
         variables: {
             pageSize: pageSize,
             pageNumber: currentPage,
@@ -20,10 +20,13 @@ export default function Page ()  {
             searchTerm: "",
             statusFilter: UserBlockStatus.All,
         },
+        fetchPolicy: "cache-and-network",
+        notifyOnNetworkStatusChange: true,
     });
 
-    const users = data?.getUsers?.users ?? [];
-    const totalCount = data?.getUsers?.pagination?.totalCount ?? 0;
+    const currentData = data ?? previousData;
+    const users = currentData?.getUsers?.users ?? [];
+    const totalCount = currentData?.getUsers?.pagination?.totalCount ?? 0;
 
     const handlePageChange = (page: number) => {
         setPage(page);
@@ -37,7 +40,9 @@ export default function Page ()  {
     if (error) return <p>Error: {error.message}</p>;
 
     return (
-        <section style={{}}>
+        <section style={{
+            padding: "1.5rem"
+        }}>
             <UsersList users={users}/>
             <div style={{display: "flex", justifyContent: "start", alignItems: "center"}}>
 

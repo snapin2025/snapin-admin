@@ -38,3 +38,36 @@ export const GET_USERS = gql`
     }
   }
 `;
+
+export const GET_USER_DETAIL = gql`
+  query GetSuperAdminUserDetail($userId: Int!) {
+    getUser(userId: $userId) {
+      id
+      userName
+      email
+      createdAt
+      profile {
+        id
+        userName
+        firstName
+        lastName
+        city
+        country
+        region
+        dateOfBirth
+        aboutMe
+        createdAt
+        avatars {
+          url
+          width
+          height
+          fileSize
+        }
+      }
+      userBan {
+        reason
+        createdAt
+      }
+    }
+  }
+`;

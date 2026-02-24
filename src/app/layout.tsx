@@ -15,10 +15,10 @@ export default function RootLayout({children,}: Readonly<{ children: ReactNode; 
 
     return (
         <html lang="en">
-        <body>
+        <body style={{ height: "100dvh", display: "flex", flexDirection: "column" }}>
         <ApolloWrapper>
             <Header/>
-            <main>
+            <main style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "stretch"}}>
                 {children}
             </main>
         </ApolloWrapper>

@@ -20,9 +20,9 @@ export default async function AdminLayout({children}: { children: ReactNode }) {
             margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "220px 1fr", // ширина сайдбара + основной контент
-            minHeight: "100vh",
         }}>
-            <Sidebar/>
+
+            <Sidebar />
             {children}
         </div>
     ); // рендерим admin страницы
