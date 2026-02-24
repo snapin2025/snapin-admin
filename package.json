@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:production": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
     "code-gen": "npx graphql-codegen"
