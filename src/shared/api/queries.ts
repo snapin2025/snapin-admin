@@ -1,0 +1,84 @@
+import {gql} from "@apollo/client";
+
+export const GET_USERS = gql`
+  query GetUsers(
+    $pageSize: Int
+    $pageNumber: Int
+    $sortBy: String
+    $sortDirection: SortDirection
+    $searchTerm: String
+    $statusFilter: UserBlockStatus
+  ) {
+    getUsers(
+      pageSize: $pageSize
+      pageNumber: $pageNumber
+      sortBy: $sortBy
+      sortDirection: $sortDirection
+      searchTerm: $searchTerm
+      statusFilter: $statusFilter
+    ) {
+      users {
+        id
+        userName    
+        email
+        createdAt
+        profile {     
+          id
+          userName
+          firstName
+          lastName
+          createdAt  # ← Добавьте эту строку!
+          avatars {
+            url
+            width
+            height
+            fileSize
+          }
+        }
+        userBan {
+          reason
+          createdAt
+        }
+      }
+      pagination {
+        page
+        pageSize
+        pagesCount
+        totalCount
+      }
+    }
+  }
+`;
+
+export const GET_USER_DETAIL = gql`
+  query GetSuperAdminUserDetail($userId: Int!) {
+    getUser(userId: $userId) {
+      id
+      userName
+      email
+      createdAt
+      profile {
+        id
+        userName
+        firstName
+        lastName
+        city
+        country
+        region
+        dateOfBirth
+        aboutMe
+        createdAt
+        avatars {
+          url
+          width
+          height
+          fileSize
+        }
+      }
+      userBan {
+        reason
+        createdAt
+      }
+    }
+  }
+`;

@@ -1,7 +1,9 @@
 import type {Metadata} from "next";
-import "snapinui/style.css"
 import {ReactNode} from "react";
 import {ApolloWrapper} from "@/ApolloWrapper";
+import {Header} from "@/widgets/header";
+import "./globals.css"
+import "snapinui/style.css"
 
 
 export const metadata: Metadata = {
@@ -13,9 +15,12 @@ export default function RootLayout({children,}: Readonly<{ children: ReactNode; 
 
     return (
         <html lang="en">
-        <body>
+        <body style={{ height: "100dvh", display: "flex", flexDirection: "column" }}>
         <ApolloWrapper>
-            {children}
+            <Header/>
+            <main style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "stretch"}}>
+                {children}
+            </main>
         </ApolloWrapper>
         </body>
         </html>

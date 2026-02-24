@@ -1,22 +1,25 @@
 "use client";
-// ^ this file needs the "use client" pragma
 
-import { HttpLink } from "@apollo/client";
+import {HttpLink} from "@apollo/client";
 import {
     ApolloNextAppProvider,
     ApolloClient,
     InMemoryCache,
 } from "@apollo/client-integration-nextjs";
+import {PropsWithChildren} from "react";
 
 // have a function to create a client for you
 function makeClient() {
+
     const httpLink = new HttpLink({
         // this needs to be an absolute url, as relative urls cannot be used in SSR
-        uri: "https://inctagram.work/api/v1/graphql",
+        uri: "http://localhost:3000/api/graphql", // <-- наш
+        credentials: "include", // чтобы cookie отправлялись автоматически
         // you can disable result caching here if you want to
         // (this does not work if you are rendering your page with `export const dynamic = "force-static"`)
+
         fetchOptions: {
-            // you can pass additional options that should be passed to `fetch` here,
+                        // you can pass additional options that should be passed to `fetch` here,
             // e.g. Next.js-related `fetch` options regarding caching and revalidation
             // see https://nextjs.org/docs/app/api-reference/functions/fetch#fetchurl-options
         },
@@ -35,7 +38,7 @@ function makeClient() {
 }
 
 // you need to create a component to wrap your app in
-export function ApolloWrapper({ children }: React.PropsWithChildren) {
+export function ApolloWrapper({children}: PropsWithChildren) {
     return (
         <ApolloNextAppProvider makeClient={makeClient}>
             {children}

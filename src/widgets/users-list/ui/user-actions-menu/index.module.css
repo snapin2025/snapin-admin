@@ -1,0 +1,13 @@
+.menu {
+    background-color: var(--color-dark-100);
+}
+
+.IconButton:focus {
+   outline:1px solid var(--color-accent-100);
+}
+
+.itemText {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

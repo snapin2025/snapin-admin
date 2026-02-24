@@ -1,0 +1,9 @@
+schema: "https://inctagram.work/api/v1/graphql"
+documents: src/**/*.{ts,tsx}
+generates:
+  src/graphql-types.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+    config:
+      avoidOptionals: false  # Добавьте эту строку
