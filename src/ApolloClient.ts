@@ -6,7 +6,7 @@ export const {getClient, query, PreloadQuery} = registerApolloClient(() => {
     return new ApolloClient({
         cache: new InMemoryCache(),
         link: new HttpLink({
-            uri: "http://localhost:3000/api/graphql", // <-- наш route handler
+            uri: `https://${process.env.NEXT_PUBLIC_BASE_URL}/api/graphql`, // <-- наш route handler
             credentials: "include"
         }),
     });
