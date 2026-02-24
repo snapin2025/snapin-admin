@@ -1,3 +1,4 @@
+"use client"
 import {User} from "@/graphql-types";
 import {Table} from "@/shared/ui/Table/Table";
 import { UsersHead } from "./UsersHead";

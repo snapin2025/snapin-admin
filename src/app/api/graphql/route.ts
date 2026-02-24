@@ -24,7 +24,7 @@ export async function POST(req: Request) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Basic YWRtaW5AZ21haWwuY29tOmFkbWlu`,
+            Authorization: `Basic ${token}`,
         },
         body,
     });
