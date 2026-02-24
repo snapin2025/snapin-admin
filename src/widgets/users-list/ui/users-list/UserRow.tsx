@@ -1,4 +1,4 @@
-
+"use client"
 import {memo} from "react";
 import { Table } from "@/shared/ui/Table/Table";
 import Link from "next/link";
