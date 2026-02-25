@@ -1,3 +1,4 @@
+"use client"
 
 import {PaginationModel} from "@/graphql-types";
 import {useQueryParams} from "@/shared/model/useQueryParams";

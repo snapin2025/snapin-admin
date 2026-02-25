@@ -1,3 +1,4 @@
+"use client"
 import {ComponentPropsWithoutRef, ComponentRef, ElementType, Ref} from 'react'
 
 import clsx from 'clsx'
