@@ -9,5 +9,6 @@ export const {getClient, query, PreloadQuery} = registerApolloClient(() => {
             uri: `/api/graphql`, // <-- наш route handler
             credentials: "include"
         }),
+
     });
 });
