@@ -18,7 +18,11 @@ export const useQueryParams = <T extends Record<string, string | number | boolea
             }
         });
 
-        router.push(`?${params.toString()}`, { scroll: false });
+        window.history.pushState(
+            null,
+            "",
+            `?${params.toString()}`
+        );
     };
 
     return {
