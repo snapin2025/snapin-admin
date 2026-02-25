@@ -43,7 +43,7 @@ export default function Page() {
         <section style={{
             padding: "1.5rem"
         }}>
-            <UsersList users={users}/>
+            <div>{JSON.stringify(users, null, 2)}</div>
             <div style={{display: "flex", justifyContent: "start", alignItems: "center"}}>
 
                 <Pagination onPageChange={handlePageChange}
