@@ -6,7 +6,7 @@ export async function POST(req: Request) {
     // Проверяем креды через backend GraphQL
     const token = Buffer.from(`${email}:${password}`).toString("base64");
 
-    const resBackend = await fetch("https://snapin.ru/api/v1/graphql", {
+    const resBackend = await fetch("https://inctagram.work/api/v1/graphql", {
         method: "POST",
         credentials: "include",
         headers: {
