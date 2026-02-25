@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     // Берём тело запроса от клиента
     const body = await req.text();
 
-    const resBackend = await fetch("https://inctagram.work/api/v1/graphql", {
+    const resBackend = await fetch("https://snapin.ru/api/v1/graphql", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
