@@ -1,10 +1,9 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import {useSearchParams} from "next/navigation";
 
 export const useQueryParams = <T extends Record<string, string | number | boolean>>() => {
     const searchParams = useSearchParams();
-    const router = useRouter();
 
     // Обновление одного или нескольких параметров сразу
     const setQueryParams = (updates: Partial<T>) => {
